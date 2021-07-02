@@ -16,23 +16,22 @@ class Solution {
 //     return output;
 // }
     public int lengthOfLongestSubstring(String A) {
-         int en=0;
         int n=A.length();
-        int  le=0;
-        Set set=new HashSet();
-        int st=0;
-        while(st<n){
-            if(!set.contains(A.charAt(st))){
-                set.add(A.charAt(st));
-                st++;
-                le = Math.max(le,set.size());
-        }else{
-            set.remove(A.charAt(en));
-            en++;
+        int ans=0;
+        StringBuilder sb=new StringBuilder();
+        for(char c:A.toCharArray()){
+            if(sb.indexOf(String.valueOf(c))==-1){
+                sb.append(c);
+                ans=Math.max(ans,sb.length());
+            }else{
+                int k=sb.indexOf(String.valueOf(c));
+                sb.delete(0,k+1);
+                 sb.append(c);
+            }
+        
         }
-            
-        }
-        return le;
-    }
+        
+        return ans;
         
     }
+}
