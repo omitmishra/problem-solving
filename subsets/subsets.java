@@ -1,22 +1,20 @@
 class Solution {
-    public List<List<Integer>> subsets(int[] arr) {
-        List<Integer> curr = new ArrayList<Integer>();
+    public List<List<Integer>> subsets(int[] nums) {
+        Arrays.sort(nums);
 		List<List<Integer>> ans = new ArrayList<>();
-		rec(arr, 0, curr, ans);
-        return ans;
-    }
-    
-    public void rec(int[] arr, int i, List<Integer> curr, List<List<Integer>> ans) {
-		if (i == arr.length) {
-			ans.add(new ArrayList<Integer>(curr));
-			return;
-		}
-		curr.add(arr[i]);
-		rec(arr, i + 1, curr, ans);
-		curr.remove(curr.size() - 1);
-		rec(arr, i + 1, curr, ans);
-        
+		List cur = new ArrayList<>();
+		backTrack(nums, ans, cur, 0);
+		return ans;
 	}
+
+	public void backTrack (int[] nums, List<List<Integer>> ans, List<Integer> cur, int start) {
+		ans.add(new ArrayList<>(cur));
+		for (int i = start; i < nums.length; i++) {
+			if (i > start && nums[i] == nums[i - 1]) continue;
+			cur.add(nums[i]);
+			backTrack(nums, ans, cur, i + 1);
+			cur.remove(cur.size() - 1);
+		}
+
+    }
 }
-
-
