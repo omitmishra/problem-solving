@@ -5,7 +5,7 @@ class Solution {
         int st = intervals[0][0];
         int en = intervals[0][1];
         for (int i = 1; i < intervals.length; i++) {
-            if (intervals[i][0] <= en) {
+            if (en>=intervals[i][0]) {
                 en = Math.max(en, intervals[i][1]);
             } else {
                 list.add(new int[]{st, en});
