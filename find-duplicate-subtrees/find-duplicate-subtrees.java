@@ -15,7 +15,7 @@
  */
 class Solution {
     public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
-        List<TreeNode> list=new ArrayList<>();
+         List<TreeNode> list=new ArrayList<>();
         HashMap<String,Integer> hm=new HashMap<>();
         helper(root,hm,list);
         return list;
@@ -32,6 +32,5 @@ class Solution {
             list.add(root);
         }
         return temp;
-    } 
-
+    }
 }
