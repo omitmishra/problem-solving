@@ -14,25 +14,23 @@
  * }
  */
 class Solution {
-    int max=0;
+     int max=0;
     public int maxAncestorDiff(TreeNode root) {
          // int max = 0;
-        dfs(root,new LinkedList<>());
+        helper(root,root.val,root.val);
         return max;
     }
-    private void dfs(TreeNode root,LinkedList<Integer> list){
-        if(root == null)
-            return ;
-        
-        for(int x : list){
-            max = Math.max(max,Math.abs(x-root.val));
-        }
-        
-        list.add(root.val);
-        
-        dfs(root.left,list);
-        dfs(root.right,list);
-        
-        list.pollLast();  
+    
+    private void helper(TreeNode node, int curMax, int curMin){
+
+    if(node ==null){
+        return;
+    }
+    curMax = Math.max(curMax, node.val);
+    curMin = Math.min(curMin, node.val);
+    max= Math.max(max, Math.abs(curMin- curMax));
+    helper(node.left,curMax, curMin);
+    helper(node.right,curMax, curMin);
+    return;
     }
 }
