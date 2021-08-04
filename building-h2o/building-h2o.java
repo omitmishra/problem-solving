@@ -1,32 +1,25 @@
 class H2O {
-
-     private Semaphore hydrogenSemaphore;
-    private Semaphore oxygenSemaphore;
+     private Semaphore HSemaphore = new Semaphore(2);
+    private Semaphore OSemaphore = new Semaphore(0);
 
     public H2O() {
-        hydrogenSemaphore = new Semaphore(2);
-        oxygenSemaphore = new Semaphore(0);
+        
     }
 
     public void hydrogen(Runnable releaseHydrogen) throws InterruptedException {
-        oxygenSemaphore.acquire();
-
-        try {
+            HSemaphore.acquire(1);
             // releaseHydrogen.run() outputs "H". Do not change or remove this line.
             releaseHydrogen.run();
-        } finally {
-            hydrogenSemaphore.release();
-        }
+            if(HSemaphore.availablePermits() == 0) {
+               OSemaphore.release();
+            }
     }
 
     public void oxygen(Runnable releaseOxygen) throws InterruptedException {
-        hydrogenSemaphore.acquire(2);
-
-        try {
-            // releaseOxygen.run() outputs "O". Do not change or remove this line.
-            releaseOxygen.run();
-        } finally {
-            oxygenSemaphore.release(2);
-        }
+        OSemaphore.acquire(1);
+        // releaseOxygen.run() outputs "O". Do not change or remove this line.
+		releaseOxygen.run();
+        HSemaphore.release(2);
+       // HSemaphore.release();
     }
 }
