@@ -1,7 +1,7 @@
 class Solution {
-         List<List<Integer>> res=new ArrayList<List<Integer>>();
+     List<List<Integer>> res=new ArrayList<List<Integer>>();
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-     Arrays.sort(candidates);
+   //  Arrays.sort(candidates);
         
         gr(candidates,0,target,new ArrayList<Integer>());
         return res;
