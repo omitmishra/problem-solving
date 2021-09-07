@@ -1,3 +1,4 @@
+[Discussion Post (created on 7/8/2021 at 10:25)](https://leetcode.com/problems/basic-calculator/discuss/1449363/asan-idea)  
 <h2>224. Basic Calculator</h2><h3>Hard</h3><hr><div><p>Given a string <code>s</code> representing a valid expression, implement a basic calculator to evaluate it, and return <em>the result of the evaluation</em>.</p>
 
 <p><strong>Note:</strong> You are <strong>not</strong> allowed to use any built-in function which evaluates strings as mathematical expressions, such as <code>eval()</code>.</p>
