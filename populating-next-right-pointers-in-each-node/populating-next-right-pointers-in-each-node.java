@@ -32,5 +32,5 @@ class Solution {
         connect(root.left);
         connect(root.right);
         return root;
-    } 
+    }
 }
