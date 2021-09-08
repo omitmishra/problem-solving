@@ -1,22 +1,19 @@
 class Solution {
     public int uniqueLetterString(String S) {
-          Map<Character, ArrayList<Integer>> h = new HashMap<>();
-        char[] ca= S.toCharArray();
+        int M = 1000000007;
+        int[] cur = new int[128];
+        int[] prev = new int[128];
+        Arrays.fill(cur, -1);
+        Arrays.fill(prev, -1);
+        int count = 0;
+        long sum = 0;
         for (int i = 0; i < S.length(); i++) {
-            ArrayList<Integer> l = h.getOrDefault(ca[i], new ArrayList<>());
-            l.add(i);
-            h.put(ca[i], l);
-        }
-        int sum  = 0;
-        for (Map.Entry<Character, ArrayList<Integer>> entry : h.entrySet()) {
-            ArrayList<Integer> l = entry.getValue();
-            for (int i = 0; i < l.size(); i++) {
-             int left = i == 0 ? l.get(i) : l.get(i) - l.get(i - 1) - 1;
-             int right = i == l.size() - 1 ? S.length() - l.get(i) - 1 : l.get(i + 1) - l.get(i) - 1;
-                sum = (sum + 1 + left + right + left * right) % 1000000007;
-            }
-        }
-        return sum;
-
+            int k = S.charAt(i);
+            count += i - cur[k] - (cur[k] - prev[k]);
+            prev[k] = cur[k];
+            cur[k] = i;
+            sum = (sum + count) % M;
+        }        
+        return (int)sum;
     }
 }
