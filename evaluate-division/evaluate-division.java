@@ -20,7 +20,7 @@ class Solution {
         }
 
         private double dfs(String s, String d, Set<String> visited, Map<String, List<Node>> g) {
-            if (!(g.containsKey(s) && g.containsKey(d)))
+            if (!(g.containsKey(s)))
                 return -1.0;
             if (s.equals(d))
                 return 1.0;
