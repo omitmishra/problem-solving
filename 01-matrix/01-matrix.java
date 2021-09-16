@@ -1,33 +1,34 @@
 class Solution {
-    public int[][] updateMatrix(int[][] mat) {
-        int n=mat.length;
-        int m=mat[0].length;
-        Queue<int[]>q=new LinkedList<>();
+    public int[][] updateMatrix(int[][] matrix) {
+      
+        int m = matrix.length;
+        int n = matrix[0].length;
         
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                if(mat[i][j]==0){
-                      q.add(new int []{i, j});
-                } else
-                    mat[i][j] = Integer.MAX_VALUE;
-                    
+        int res[][] = new int[m][n];
+        for(int[] r : res) Arrays.fill(r,Integer.MAX_VALUE);
+        Queue<int[]> Q = new LinkedList<>();
+        
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(matrix[i][j] == 1) continue;
+                res[i][j] = 0;
+                Q.add(new int[]{i,j});
             }
         }
-      int [][] directions = new int [][]{{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
-         while (!q.isEmpty()) {
-            int [] current = q.poll();
-            int x = current[0];
-            int y = current[1];
-            for (int [] dir : directions) {
-                int newX = dir[0] + x;
-                int newY = dir[1] + y;
-                if (newX < 0 || newY < 0 || newX >= n || newY >= m || mat[newX][newY] <= mat[x][y] + 1)
-                    continue;
-                q.add(new int [] {newX, newY});
-                mat[newX][newY] = mat[x][y] + 1;
+        
+        int dir[][] = new int[][]{{0,1},{1,0},{-1,0},{0,-1}};
+     
+        while(!Q.isEmpty()){
+            int[]cell = Q.poll();
+            int curr_x = cell[0], curr_y = cell[1];
+            for(int d[] : dir){
+                int x = curr_x + d[0]; //neigbour x
+                int y = curr_y + d[1]; //neighbour y
+                if(x< 0 || y< 0 || x >= m || y >= n ||  (res[x][y] < res[curr_x][curr_y]+1)) continue;
+                res[x][y] = res[curr_x][curr_y]+1;
+                Q.offer(new int[]{x,y});
             }
         }
-        return mat;
+        return res;
     }
-
-    }
+}
