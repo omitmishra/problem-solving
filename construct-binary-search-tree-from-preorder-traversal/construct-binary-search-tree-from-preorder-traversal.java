@@ -14,17 +14,25 @@
  * }
  */
 class Solution {
-    int i = 0;
+   // int i = 0;
     public TreeNode bstFromPreorder(int[] arr) {
-        return helper(arr, Integer.MAX_VALUE);
-    }
+    return construct(arr,0,arr.length-1);
+}
+    static TreeNode construct(int pre[],int start,int end){
+              if(start>end)
+              return null;
 
-    public TreeNode helper(int[] arr, int bound) {
-        if (i == arr.length || arr[i] > bound) 
-            return null;
-        TreeNode root = new TreeNode(arr[i++]);
-        root.left = helper(arr, root.val);
-        root.right = helper(arr, bound);
-        return root;
-    }
+           TreeNode root=new TreeNode(pre[start]);
+  
+           int i;
+           for(i=start+1;i<=end;i++)
+           {
+             if(pre[i]>root.val)
+                    break;
+            }
+           root.left=construct(pre,start+1,i-1);
+           root.right=construct(pre,i,end);
+ 
+           return root;
+}
 }
